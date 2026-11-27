@@ -18,6 +18,8 @@ navigation.querySelectorAll("a").forEach((link) => {
 
 const roles = ["UPSC Aspirant", "Aspiring Developer"];
 const roleElement = document.querySelector(".role-word");
+const roleThemes = ["aspirant", "developer"];
+roleElement.dataset.role = roleThemes[0];
 let roleIndex = 0;
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -27,6 +29,7 @@ if (!reducedMotion) {
     window.setTimeout(() => {
       roleIndex = (roleIndex + 1) % roles.length;
       roleElement.textContent = roles[roleIndex];
+      roleElement.dataset.role = roleThemes[roleIndex];
       roleElement.classList.remove("role-changing");
     }, 180);
   }, 2600);

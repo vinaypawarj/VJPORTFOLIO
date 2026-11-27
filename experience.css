@@ -18,7 +18,33 @@ body::before { content: ""; position: absolute; top: 0; right: 0; width: min(90v
 .hero h1 { font-size: clamp(76px, 8.9vw, 124px); line-height: .93; letter-spacing: -.07em; margin-bottom: 28px; }
 .hero h1 .name-second { display: block; color: var(--red); }
 .hero .role-line { margin-bottom: 17px; }
-.hero .role-word { font-size: 15px; color: #d9d4d4; font-weight: 500; }
+.hero .role-word {
+  --role-colour: #ffcf70;
+  --role-start: #ffe2a0;
+  --role-end: #ffc45b;
+  --role-glow: rgba(255, 196, 91, .18);
+  font-size: clamp(17px, 1.55vw, 20px);
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: .01em;
+  color: var(--role-colour);
+  filter: drop-shadow(0 0 12px var(--role-glow));
+}
+.hero .role-word[data-role="developer"] {
+  --role-colour: #80caff;
+  --role-start: #9cecff;
+  --role-end: #619cff;
+  --role-glow: rgba(97, 156, 255, .2);
+}
+@supports ((background-clip: text) or (-webkit-background-clip: text)) {
+  .hero .role-word {
+    background-image: linear-gradient(105deg, var(--role-start), var(--role-end));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+}
 .hero .role-prefix { font-size: 9px; }
 .hero-intro { max-width: 430px; font-size: 13px; line-height: 1.85; margin-bottom: 26px; }
 .hero-actions { gap: 11px; }
