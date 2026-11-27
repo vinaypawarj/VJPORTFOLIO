@@ -2,7 +2,7 @@
   document.documentElement.classList.add("experience-ready");
   const intro = document.querySelector("#portfolio-intro");
   const remainingLabel = document.querySelector("#intro-remaining");
-  const DURATION = 10000;
+  const DURATION = 5000;
 
   if (intro && remainingLabel && typeof intro.showModal === "function") {
     let remaining = DURATION;
@@ -48,7 +48,7 @@
       clearTimers();
       previousFocus = document.activeElement === intro ? previousFocus : document.activeElement;
       remaining = DURATION;
-      remainingLabel.textContent = "10s";
+      remainingLabel.textContent = "5s";
       intro.style.setProperty("--intro-duration", DURATION + "ms");
       intro.classList.remove("intro-running", "intro-paused");
       if (!intro.open) intro.showModal();

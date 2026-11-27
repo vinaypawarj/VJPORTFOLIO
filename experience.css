@@ -159,3 +159,27 @@ body::before { content: ""; position: absolute; top: 0; right: 0; width: min(90v
 @media (prefers-reduced-motion: reduce) {
   .intro-dialog { scroll-behavior: auto; }
 }
+
+/* Cinematic vector identity, shared by the navigation and footer. */
+.brand { display: inline-flex; align-items: center; gap: 11px; letter-spacing: normal; line-height: 1; }
+.brand-emblem { position: relative; display: block; flex: 0 0 auto; width: 44px; height: 44px; border-radius: 12px; overflow: hidden; filter: drop-shadow(-3px 0 9px #eac18c12) drop-shadow(3px 0 9px #6ea7f523); }
+.brand-emblem img { display: block; width: 100%; height: 100%; }
+.brand-emblem::after { content: ""; position: absolute; inset: -20% -70%; pointer-events: none; background: linear-gradient(110deg, transparent 35%, #e6f4ff38 50%, transparent 65%); transform: translateX(-110%); animation: brand-cinema-glint 8s ease-in-out infinite; }
+.brand-wordmark { display: flex; flex-direction: column; gap: 6px; }
+.brand-wordmark strong { color: #eef4ff; font: 800 17px/1 var(--display); letter-spacing: .17em; }
+.brand-wordmark small { color: #a3b3c9; font: 500 7px/1 var(--body); letter-spacing: .42em; padding-left: 1px; }
+.brand:hover .brand-wordmark strong { color: #fff8e6; }
+.footer-brand .brand-emblem { width: 34px; height: 34px; border-radius: 9px; }
+.footer-brand .brand-wordmark { gap: 5px; }
+.footer-brand .brand-wordmark strong { font-size: 14px; }
+.footer-brand .brand-wordmark small { font-size: 6px; }
+@supports ((background-clip: text) or (-webkit-background-clip: text)) {
+  .brand-wordmark strong { background: linear-gradient(115deg, #fff2d7, #f8fbff 46%, #a6caee); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+}
+@keyframes brand-cinema-glint { 0%, 65% { transform: translateX(-110%); opacity: 0; } 73% { opacity: 1; } 88%, 100% { transform: translateX(110%); opacity: 0; } }
+@media (max-width: 650px) {
+  .brand-emblem { width: 40px; height: 40px; }
+  .brand-wordmark strong { font-size: 16px; }
+  .brand-wordmark small { font-size: 6px; }
+}
+@media (prefers-reduced-motion: reduce) { .brand-emblem::after { animation: none !important; } }
