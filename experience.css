@@ -175,14 +175,14 @@ body::before { content: ""; position: absolute; top: 0; right: 0; width: min(90v
 .hero h1 .name-word { position: relative; display: block; width: fit-content; }
 .hero h1 .name-letter { display: inline-block; white-space: pre; }
 .hero h1[data-name-animation="pending"] .name-letter { opacity: 0; }
-.hero h1[data-name-animation="playing"] .name-letter { animation: main-name-ink .18s ease-out both; animation-delay: var(--name-delay); }
+.hero h1[data-name-animation="playing"] .name-letter { animation: main-name-ink .28s cubic-bezier(.2,.7,.2,1) both; animation-delay: var(--name-delay); }
 .name-pen { position: absolute; left: 0; top: .16em; width: 3px; height: .68em; color: inherit; opacity: 0; transform: rotate(16deg); pointer-events: none; }
 .name-pen::before { content: ""; position: absolute; inset: 0; border-radius: 3px; background: currentColor; box-shadow: 0 0 15px currentColor; }
-.hero h1[data-name-animation="playing"] .name-first .name-pen { animation: main-pen-first 1.5s linear both; }
-.hero h1[data-name-animation="playing"] .name-second .name-pen { animation: main-pen-second 1.5s linear both; }
+.hero h1[data-name-animation="playing"] .name-first .name-pen { animation: main-pen-first 5s linear both; }
+.hero h1[data-name-animation="playing"] .name-second .name-pen { animation: main-pen-second 5s linear both; }
 @keyframes main-name-ink { from { opacity: 0; transform: translateY(7px); filter: blur(2px); } to { opacity: 1; transform: none; filter: none; } }
-@keyframes main-pen-first { 0%, 6% { opacity: 0; left: 0; } 7% { opacity: 1; left: 0; } 38% { opacity: 1; left: 100%; } 45%, 100% { opacity: 0; left: 100%; } }
-@keyframes main-pen-second { 0%, 47% { opacity: 0; left: 0; } 48% { opacity: 1; left: 0; } 85% { opacity: 1; left: 100%; } 94%, 100% { opacity: 0; left: 100%; } }
+@keyframes main-pen-first { 0%, 4% { opacity: 0; left: 0; } 5% { opacity: 1; left: 0; } 36% { opacity: 1; left: 100%; } 41%, 100% { opacity: 0; left: 100%; } }
+@keyframes main-pen-second { 0%, 42% { opacity: 0; left: 0; } 43% { opacity: 1; left: 0; } 90% { opacity: 1; left: 100%; } 96%, 100% { opacity: 0; left: 100%; } }
 @media (prefers-reduced-motion: reduce) {
   .hero h1 .name-letter { opacity: 1 !important; transform: none !important; filter: none !important; animation: none !important; }
   .name-pen { display: none !important; }

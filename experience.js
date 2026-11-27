@@ -87,7 +87,7 @@
   (() => {
     const heading = document.querySelector(".hero h1");
     if (!heading) return;
-    const storageKey = "vinay-name-writing-v1";
+    const storageKey = "vinay-name-writing-v2";
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let seen = false;
     try { seen = localStorage.getItem(storageKey) === "seen"; } catch { /* Storage is optional. */ }
@@ -113,7 +113,7 @@
       try { localStorage.setItem(storageKey, "seen"); } catch { /* Keep one-shot behaviour for this page. */ }
       if (observer) observer.disconnect();
       window.removeEventListener("scroll", writeMainName);
-      window.setTimeout(() => { heading.dataset.nameAnimation = "complete"; }, 1650);
+      window.setTimeout(() => { heading.dataset.nameAnimation = "complete"; }, 5000);
     }
 
     if ("IntersectionObserver" in window) {
