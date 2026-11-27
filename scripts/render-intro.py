@@ -79,7 +79,6 @@ def scene_one(d, layer, t):
     d.arc((415, 100, 865, 550), 150 - t * 45, 205 - t * 45, fill=(116, 144, 172), width=2)
     text(d, (640, 323), "VP", 160, bold=True, anchor="mm")
     label(d, (533, 563), "CURIOSITY MEETS PURPOSE", WHITE, 11)
-    text(d, (640, 606), "A little about the person behind the ideas.", 19, MUTED, anchor="mm")
 
 
 def scene_two(d, layer, t):
@@ -105,7 +104,6 @@ def scene_three(d, layer, t):
     layer.alpha_composite(portrait, (770, 127))
     d.ellipse((758, 115, 1240, 597), outline=(77, 53, 59), width=1)
     d.arc((749, 106, 1249, 606), -85+(t-5)*32, 30+(t-5)*32, fill=RED, width=3)
-    label(d, (84, 179), "THE PERSON BEHIND THE IDEAS", size=10)
     text(d, (76, 234), "VINAY", 115, bold=True)
     text(d, (76, 350), "PAWAR.", 115, RED, bold=True)
     d.line((84, 501, 135, 501), fill=RED, width=2)
