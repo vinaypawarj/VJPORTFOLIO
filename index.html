@@ -9,8 +9,13 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="experience.css?v=main-type-five-2">
   <link rel="stylesheet" href="animation.css?v=clean-intro-2">
+  <link rel="stylesheet" href="music.css?v=soundtrack-1">
+  <link rel="stylesheet" href="chat.css?v=assistant-1">
   <script src="script.js?v=twenty-colours-1" defer></script>
   <script src="experience.js?v=main-type-five-2" defer></script>
+  <script src="music.js?v=soundtrack-1" defer></script>
+  <script src="chat-config.js?v=assistant-1" defer></script>
+  <script src="chat.js?v=assistant-1" defer></script>
 </head>
 <body>
   <a class="skip-content" href="#main-content">Skip to content</a>
@@ -297,5 +302,47 @@
       <span>© <span id="current-year"></span> Vinay Pawar</span>
     </div>
   </footer>
+  <details class="portfolio-music" id="portfolio-music" data-video-id="yNUidYJ6EtA">
+    <summary class="music-toggle" aria-controls="music-panel">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 18V5l11-2v13M9 9l11-2"/><ellipse cx="6" cy="18" rx="3" ry="2.5"/><ellipse cx="17" cy="16" rx="3" ry="2.5"/></svg>
+      <span>Music</span>
+      <span class="music-chevron" aria-hidden="true">⌃</span>
+    </summary>
+    <section class="music-panel" id="music-panel" aria-labelledby="music-heading">
+      <div class="music-panel-header">
+        <div><span class="music-kicker">THE PORTFOLIO SOUNDTRACK</span><h2 id="music-heading">A little inspiration.</h2></div>
+        <button class="music-close" id="music-close" type="button" aria-label="Stop and close music"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button>
+      </div>
+      <div class="music-frame" id="music-frame"></div>
+      <div class="music-credit"><span>NETUNO MUSIC · YouTube</span><a href="https://www.youtube.com/shorts/yNUidYJ6EtA" target="_blank" rel="noopener noreferrer">Open on YouTube ↗</a></div>
+      <noscript><p><a href="https://www.youtube.com/shorts/yNUidYJ6EtA" target="_blank" rel="noopener noreferrer">Listen to the soundtrack on YouTube ↗</a></p></noscript>
+    </section>
+  </details>
+  <div class="portfolio-chat" id="portfolio-chat">
+    <button class="chat-launcher" id="chat-launcher" type="button" aria-expanded="false" aria-controls="chat-panel" hidden>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-8 8H5l-4 3 1.5-6A8 8 0 1 1 20 11.5Z"/><path d="M7 10h8M7 14h5"/></svg>
+      <span>Let’s chat</span>
+    </button>
+    <section class="chat-panel" id="chat-panel" role="dialog" aria-modal="false" aria-labelledby="chat-title" hidden>
+      <header class="chat-header">
+        <span class="chat-avatar" aria-hidden="true">VP<span>✦</span></span>
+        <div class="chat-heading"><h2 id="chat-title">Vinay’s assistant</h2><p id="chat-mode">Portfolio guide · AI connection pending</p></div>
+        <button class="chat-icon-button" id="chat-reset" type="button" aria-label="Start a new chat" title="New chat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7v5h-5M20 12a8 8 0 1 0-2 5"/></svg></button>
+        <button class="chat-icon-button" id="chat-close" type="button" aria-label="Close chat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button>
+      </header>
+      <div class="chat-messages" id="chat-messages" role="log" aria-label="Chat messages" aria-live="polite" aria-relevant="additions"></div>
+      <div class="chat-suggestions" id="chat-suggestions" aria-label="Suggested questions">
+        <button type="button" data-chat-question="Tell me about Vinay">About Vinay</button>
+        <button type="button" data-chat-question="What skills is Vinay learning?">Skills</button>
+        <button type="button" data-chat-question="How can I contact Vinay?">Contact</button>
+      </div>
+      <form class="chat-form" id="chat-form">
+        <label class="sr-only" for="chat-input">Your message</label>
+        <div class="chat-composer"><textarea id="chat-input" name="message" rows="1" maxlength="2000" placeholder="Ask about Vinay’s portfolio…" required></textarea><button id="chat-send" type="submit" aria-label="Send message"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5m-6 6 6-6 6 6"/></svg></button></div>
+        <p class="chat-note" id="chat-note">Quick portfolio answers. General AI replies are not connected yet.</p>
+        <a class="chat-external" id="chat-external" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">General questions? Open ChatGPT</a>
+      </form>
+    </section>
+  </div>
 </body>
 </html>
