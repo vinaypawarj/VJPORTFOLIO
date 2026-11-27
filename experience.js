@@ -2,7 +2,7 @@
   document.documentElement.classList.add("experience-ready");
   const intro = document.querySelector("#portfolio-intro");
   const remainingLabel = document.querySelector("#intro-remaining");
-  const DURATION = 10000;
+  const DURATION = 20000;
 
   if (intro && remainingLabel && typeof intro.showModal === "function") {
     let remaining = DURATION;
@@ -36,7 +36,7 @@
       if (!soundtrack || !soundEnabled || !intro.open || document.hidden) return;
       const attempt = ++soundAttempt;
       const elapsed = DURATION - remaining + (endTimer ? performance.now() - startedAt : 0);
-      try { soundtrack.currentTime = Math.max(0, Math.min(elapsed / 1000, 9.99)); } catch { /* Start when ready. */ }
+      try { soundtrack.currentTime = Math.max(0, Math.min(elapsed / 1000, DURATION / 1000 - .01)); } catch { /* Start when ready. */ }
       soundtrack.volume = .5;
       const playback = soundtrack.play();
       if (playback?.then) playback.then(() => {
@@ -87,7 +87,7 @@
       clearTimers();
       previousFocus = document.activeElement === intro ? previousFocus : document.activeElement;
       remaining = DURATION;
-      remainingLabel.textContent = "10s";
+      remainingLabel.textContent = Math.ceil(DURATION / 1000) + "s";
       soundEnabled = true;
       stopSound(true);
       showSoundState("ready");
