@@ -111,9 +111,6 @@
 .intro-running .startup-launch { animation: startup-launch-rise var(--intro-duration) ease both; }
 .intro-running .startup-halo { animation: startup-halo-grow var(--intro-duration) ease both; }
 .intro-running .startup-sparks { animation: startup-sparks-rise var(--intro-duration) linear both; }
-.intro-sound-toggle { position: absolute; top: max(22px, env(safe-area-inset-top)); right: max(24px, env(safe-area-inset-right)); z-index: 3; display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 44px; padding: 0 15px; border: 1px solid #8e9baa66; border-radius: 25px; background: #131c2aee; color: #d3ddec; font: 500 12px var(--body); cursor: pointer; }
-.intro-sound-toggle svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-.intro-sound-toggle:hover, .intro-sound-toggle[aria-pressed="true"] { color: #ffdc99; border-color: #d7bd8d88; }
 @keyframes startup-chart-draw { 0%, 3% { stroke-dashoffset: 1; } 88%, 100% { stroke-dashoffset: 0; } }
 @keyframes startup-area-rise { 0%, 12% { opacity: 0; } 90%, 100% { opacity: 1; } }
 @keyframes startup-tower-rise { 0%, 5% { opacity: 0; transform: scaleY(.03); } 25% { opacity: .35; } 100% { opacity: .75; transform: scaleY(1); } }
@@ -124,7 +121,6 @@
 @keyframes startup-sparks-rise { from { opacity: 0; transform: translateY(30px); } 20%, 85% { opacity: .6; } to { opacity: 0; transform: translateY(-35px); } }
 @media (max-width: 650px) {
   .startup-backdrop { width: 150%; left: -30%; opacity: .48; }
-  .intro-sound-toggle { top: max(14px, env(safe-area-inset-top)); right: 16px; min-height: 40px; padding-inline: 12px; font-size: 11px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .startup-chart { stroke-dashoffset: 0; }

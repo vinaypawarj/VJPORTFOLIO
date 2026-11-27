@@ -11,18 +11,10 @@
     let countdownTimer = 0;
     let previousFocus = null;
     const soundtrack = document.querySelector("#intro-soundtrack");
-    const soundToggle = document.querySelector("#intro-sound-toggle");
-    let soundEnabled = true;
     let soundAttempt = 0;
 
-    function showSoundState(state) {
+    function setSoundState(state) {
       intro.dataset.sound = state;
-      if (!soundToggle) return;
-      soundToggle.hidden = false;
-      const playing = state === "playing";
-      soundToggle.setAttribute("aria-pressed", String(playing));
-      soundToggle.setAttribute("aria-label", playing ? "Mute intro sound" : "Enable intro sound");
-      soundToggle.querySelector("span").textContent = playing ? "Sound on" : "Enable sound";
     }
 
     function stopSound(reset = false) {
@@ -33,17 +25,17 @@
     }
 
     function playSound() {
-      if (!soundtrack || !soundEnabled || !intro.open || document.hidden) return;
+      if (!soundtrack || !intro.open || document.hidden) return;
       const attempt = ++soundAttempt;
       const elapsed = DURATION - remaining + (endTimer ? performance.now() - startedAt : 0);
       try { soundtrack.currentTime = Math.max(0, Math.min(elapsed / 1000, DURATION / 1000 - .01)); } catch { /* Start when ready. */ }
       soundtrack.volume = .5;
       const playback = soundtrack.play();
       if (playback?.then) playback.then(() => {
-        if (attempt !== soundAttempt || !intro.open || document.hidden || !soundEnabled) return;
-        showSoundState("playing");
+        if (attempt !== soundAttempt || !intro.open || document.hidden) return;
+        setSoundState("playing");
       }).catch(() => {
-        if (attempt === soundAttempt && intro.open) showSoundState("blocked");
+        if (attempt === soundAttempt && intro.open) setSoundState("blocked");
       });
     }
 
@@ -88,9 +80,8 @@
       previousFocus = document.activeElement === intro ? previousFocus : document.activeElement;
       remaining = DURATION;
       remainingLabel.textContent = Math.ceil(DURATION / 1000) + "s";
-      soundEnabled = true;
       stopSound(true);
-      showSoundState("ready");
+      setSoundState("ready");
       intro.style.setProperty("--intro-duration", DURATION + "ms");
       intro.classList.remove("intro-running", "intro-paused");
       if (!intro.open) intro.showModal();
@@ -120,15 +111,14 @@
     });
     window.addEventListener("pagehide", pauseIntro);
     window.addEventListener("pageshow", event => { if (event.persisted && intro.open) resumeIntro(); });
-    soundToggle?.addEventListener("click", () => {
-      if (soundtrack && !soundtrack.paused) {
-        soundEnabled = false;
-        stopSound();
-        showSoundState("muted");
-      } else {
-        soundEnabled = true;
-        playSound();
-      }
+    // Where autoplay is restricted, a real tap or activation key can start the
+    // remaining intro audio without displaying a separate sound prompt.
+    function startSoundAfterGesture(event) {
+      if (event.isTrusted && intro.open && soundtrack?.paused) playSound();
+    }
+    intro.addEventListener("pointerdown", startSoundAfterGesture);
+    intro.addEventListener("keydown", event => {
+      if (event.key === "Enter" || event.key === " ") startSoundAfterGesture(event);
     });
 
     // Every page opening gets the introduction, including reloads and section links.
