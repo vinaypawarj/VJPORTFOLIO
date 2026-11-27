@@ -21,8 +21,6 @@
 .toon-city { transform-origin: 520px 308px; opacity: 0; }
 .toon-plane { opacity: 0; }
 .toon-star { transform-box: fill-box; transform-origin: center; }
-.slogan-progress { position: absolute; bottom: 32px; left: clamp(24px, 4vw, 60px); right: clamp(24px, 4vw, 60px); height: 2px; background: #ffffff0d; overflow: hidden; }
-.slogan-progress::after { content: ""; display: block; height: 100%; background: linear-gradient(90deg, #ffcf70, #80caff 50%, #c5a3ff); transform: scaleX(0); transform-origin: left; }
 .intro-running.slogan-intro { animation: slogan-exit var(--intro-duration) linear both; }
 .intro-running .slogan-line:nth-child(1) { animation: slogan-learning var(--intro-duration) ease both; }
 .intro-running .slogan-line:nth-child(2) { animation: slogan-building var(--intro-duration) ease both; }
@@ -39,10 +37,8 @@
 .intro-running .toon-plane { animation: cartoon-plane var(--intro-duration) ease both; }
 .intro-running .toon-star { animation: cartoon-twinkle 3s ease-in-out infinite; }
 .intro-running .toon-star:nth-of-type(2) { animation-delay: .8s; }
-.intro-running .slogan-progress::after { animation: slogan-progress var(--intro-duration) linear both; }
 .slogan-intro.intro-paused, .intro-paused *, .intro-paused *::after { animation-play-state: paused !important; }
 @keyframes slogan-exit { 0%, 97% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(-18px); opacity: 0; } }
-@keyframes slogan-progress { to { transform: scaleX(1); } }
 @keyframes cartoon-enter { from { opacity: 0; transform: translateY(18px) scale(.97); } to { opacity: 1; transform: none; } }
 @keyframes cartoon-nod { 0%, 100% { transform: rotate(-1deg); } 50% { transform: rotate(1deg) translateY(2px); } }
 @keyframes cartoon-blink { 0%, 17%, 19%, 64%, 66%, 100% { transform: scaleY(1); } 18%, 65% { transform: scaleY(.15); } }
@@ -61,14 +57,12 @@
   .slogan-stage { grid-template-columns: 1fr; gap: 22px; width: min(420px, 100%); }
   .slogan-copy { text-align: center; font-size: clamp(28px, 7.8vw, 44px); }
   .slogan-art { width: 110%; max-width: none; }
-  .slogan-progress { bottom: 24px; left: 25px; right: 25px; }
 }
 @media (max-height: 540px) and (min-width: 480px) {
   .slogan-intro { padding: 20px 28px; }
   .slogan-stage { width: min(1040px, 100%); grid-template-columns: 1fr 1fr; gap: 20px; }
   .slogan-copy { font-size: clamp(25px, 3.8vw, 43px); text-align: left; }
   .slogan-art { width: 100%; }
-  .slogan-progress { bottom: 16px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .slogan-intro.intro-running, .slogan-intro *, .slogan-intro *::after { animation: none !important; transition: none !important; }
