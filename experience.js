@@ -82,6 +82,54 @@
     startIntro();
   }
 
+
+  // The main name writes only the first time it is actually viewed in this browser.
+  (() => {
+    const heading = document.querySelector(".hero h1");
+    if (!heading) return;
+    const storageKey = "vinay-name-writing-v1";
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let seen = false;
+    try { seen = localStorage.getItem(storageKey) === "seen"; } catch { /* Storage is optional. */ }
+    if (seen || reducedMotion) {
+      heading.dataset.nameAnimation = seen ? "seen" : "static";
+      return;
+    }
+
+    heading.dataset.nameAnimation = "pending";
+    let played = false;
+    let visible = false;
+    let observer = null;
+
+    function writeMainName() {
+      if (played || document.hidden || (intro && intro.open)) return;
+      if (!observer) {
+        const rect = heading.getBoundingClientRect();
+        visible = rect.bottom > 0 && rect.top < window.innerHeight;
+      }
+      if (!visible) return;
+      played = true;
+      heading.dataset.nameAnimation = "playing";
+      try { localStorage.setItem(storageKey, "seen"); } catch { /* Keep one-shot behaviour for this page. */ }
+      if (observer) observer.disconnect();
+      window.removeEventListener("scroll", writeMainName);
+      window.setTimeout(() => { heading.dataset.nameAnimation = "complete"; }, 1650);
+    }
+
+    if ("IntersectionObserver" in window) {
+      observer = new IntersectionObserver(entries => {
+        visible = entries.some(entry => entry.isIntersecting);
+        writeMainName();
+      }, { threshold: .25 });
+      observer.observe(heading);
+    } else {
+      window.addEventListener("scroll", writeMainName, { passive: true });
+    }
+    if (intro) intro.addEventListener("close", writeMainName);
+    document.addEventListener("visibilitychange", writeMainName);
+    writeMainName();
+  })();
+
   const feedback = document.querySelector("#testimonials");
   const feedbackNames = [...document.querySelectorAll(".testimonial-item h3")];
   const editingFeedback = new URLSearchParams(location.search).get("editTestimonials") === "1";
