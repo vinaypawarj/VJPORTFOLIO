@@ -19,20 +19,117 @@ navigation.querySelectorAll("a").forEach((link) => {
 const roles = ["UPSC Aspirant", "Aspiring Developer"];
 const roleElement = document.querySelector(".role-word");
 const roleThemes = ["aspirant", "developer"];
-roleElement.dataset.role = roleThemes[0];
+const rolePalette = [
+  [
+    "#ffe7aa",
+    "#ffc45b"
+  ],
+  [
+    "#b4f4d0",
+    "#69e6a6"
+  ],
+  [
+    "#ffd2ba",
+    "#ff9a76"
+  ],
+  [
+    "#e4ceff",
+    "#bc99ff"
+  ],
+  [
+    "#c7f8ff",
+    "#6bdde9"
+  ],
+  [
+    "#ffd0e6",
+    "#fb86b8"
+  ],
+  [
+    "#edfbb3",
+    "#c4e86b"
+  ],
+  [
+    "#d4d9ff",
+    "#9dacf7"
+  ],
+  [
+    "#ffdbb3",
+    "#fcb671"
+  ],
+  [
+    "#d0fff1",
+    "#78e4c0"
+  ],
+  [
+    "#9cecff",
+    "#619cff"
+  ],
+  [
+    "#ffcad0",
+    "#ff8091"
+  ],
+  [
+    "#dfc0ff",
+    "#b98bfa"
+  ],
+  [
+    "#f9f6cf",
+    "#e9d98b"
+  ],
+  [
+    "#d4f4ff",
+    "#84d1fa"
+  ],
+  [
+    "#ffc0f1",
+    "#ed8fdd"
+  ],
+  [
+    "#ccf7c8",
+    "#8cdb87"
+  ],
+  [
+    "#f3d0ff",
+    "#d394ed"
+  ],
+  [
+    "#ffe5ce",
+    "#ffc2a1"
+  ],
+  [
+    "#b6f4ef",
+    "#70d7ce"
+  ]
+];
 let roleIndex = 0;
+let roleRotation = 0;
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function updateRolePalette() {
+  // Each title moves through all 20 palettes, with a different starting colour.
+  const paletteIndex = (Math.floor(roleRotation / roles.length) + roleIndex * 10) % rolePalette.length;
+  const [start, end] = rolePalette[paletteIndex];
+  roleElement.dataset.role = roleThemes[roleIndex];
+  roleElement.dataset.colourStep = String(paletteIndex + 1);
+  roleElement.style.setProperty("--role-start", start);
+  roleElement.style.setProperty("--role-end", end);
+  roleElement.style.setProperty("--role-colour", start);
+  roleElement.style.setProperty("--role-glow", end + "33");
+}
+
+updateRolePalette();
 
 if (!reducedMotion) {
   window.setInterval(() => {
     roleElement.classList.add("role-changing");
     window.setTimeout(() => {
-      roleIndex = (roleIndex + 1) % roles.length;
+      roleRotation += 1;
+      roleIndex = roleRotation % roles.length;
       roleElement.textContent = roles[roleIndex];
-      roleElement.dataset.role = roleThemes[roleIndex];
+      updateRolePalette();
       roleElement.classList.remove("role-changing");
     }, 180);
-  }, 2600);
+  }, 2000);
 }
 
 const portrait = document.querySelector(".portrait-image");
