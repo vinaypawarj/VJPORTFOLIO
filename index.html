@@ -8,22 +8,50 @@
   <title>Vinay Pawar | Portfolio</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="experience.css?v=gold-blue-1">
+  <link rel="stylesheet" href="animation.css?v=auto-arrival-1">
   <script src="script.js?v=gold-blue-1" defer></script>
-  <script src="experience.js" defer></script>
+  <script src="experience.js?v=auto-arrival-1" defer></script>
 </head>
 <body>
   <a class="skip-content" href="#main-content">Skip to content</a>
-  <dialog class="intro-dialog" id="portfolio-intro" aria-label="10-second introduction to Vinay Pawar's portfolio" aria-describedby="intro-description">
-    <div class="intro-header">
-      <span class="intro-wordmark">VINAY PAWAR<span> / THE INTRO</span></span>
-      <button class="intro-skip" id="skip-intro" type="button" autofocus>Skip intro <span aria-hidden="true">&rarr;</span></button>
+  <dialog class="arrival" id="portfolio-intro" tabindex="-1" aria-label="10-second portfolio introduction" aria-describedby="arrival-description">
+    <p class="sr-only" id="arrival-description">An automatic ten-second introduction to Vinay Pawar, UPSC aspirant and aspiring developer. The portfolio opens when the animation finishes. Press Escape to enter immediately.</p>
+    <div class="arrival-top">
+      <span class="arrival-brand">VINAY PAWAR</span>
+      <span class="arrival-top-note">RESEARCH &middot; CODE &middot; IDEAS</span>
     </div>
-    <p class="sr-only" id="intro-description">A silent, ten-second film introduces Vinay Pawar, an UPSC aspirant and aspiring developer, through research, code, and purposeful ideas.</p>
-    <video class="intro-video" id="intro-video" data-src="assets/portfolio-intro.mp4?v=clean-portrait-1" poster="assets/intro-poster.jpg?v=clean-portrait-1" muted playsinline preload="none" aria-label="Vinay Pawar portfolio introduction"></video>
-    <button class="intro-play" id="play-intro" type="button" hidden>Play the 10-second intro</button>
-    <div class="intro-footer">
-      <span class="intro-caption">A CURIOUS MIND.<br>A PURPOSEFUL JOURNEY.</span>
-      <div class="intro-progress-wrap"><progress class="intro-progress" id="intro-progress" max="10" value="0" aria-label="Intro playback progress"></progress><span id="intro-remaining" aria-hidden="true">10s</span></div>
+    <div class="arrival-stage" aria-hidden="true">
+      <div class="arrival-scene arrival-mark">
+        <p class="arrival-eyebrow">CURIOSITY IN MOTION</p>
+        <div class="arrival-emblem"><i class="arrival-orbit"></i><i class="arrival-orbit arrival-orbit--outer"></i><strong>VP</strong></div>
+        <p class="arrival-intro-name">VINAY PAWAR</p>
+      </div>
+      <div class="arrival-scene arrival-statement">
+        <p class="arrival-eyebrow">A MIND FULL OF POSSIBILITIES</p>
+        <h2><span>THINK.</span><span>CREATE.</span></h2>
+        <div class="arrival-chips">
+          <span class="arrival-chip"><svg viewBox="0 0 24 24"><path d="M4 4h6l2 2 2-2h6v16h-6l-2 2-2-2H4ZM12 6v16"/></svg>RESEARCH</span>
+          <span class="arrival-chip"><svg viewBox="0 0 24 24"><path d="m8 6-6 6 6 6m8-12 6 6-6 6m-3-16-2 20"/></svg>CODE</span>
+          <span class="arrival-chip"><svg viewBox="0 0 24 24"><path d="M8 17c0-3-4-4-4-8a8 8 0 0 1 16 0c0 4-4 5-4 8ZM8 20h8m-7 3h6M12 2v4"/></svg>IDEAS</span>
+        </div>
+      </div>
+      <div class="arrival-scene arrival-roles">
+        <div class="arrival-role-copy">
+          <p class="arrival-eyebrow">VINAY PAWAR</p>
+          <h2><span>UPSC </span><span>Aspirant.</span></h2>
+          <p>Aspiring Developer.</p>
+        </div>
+        <div class="arrival-photo"><img src="./Cinematic%20split-light%20studio%20portrait.png" width="1122" height="1402" decoding="async" alt=""><i class="arrival-orbit"></i><i class="arrival-orbit arrival-orbit--outer"></i></div>
+      </div>
+      <div class="arrival-scene arrival-signature">
+        <p class="arrival-eyebrow">IDEAS BECOME POSSIBILITIES</p>
+        <h2>Vinay<span>Pawar.</span></h2>
+        <p class="arrival-eyebrow">LET’S MAKE IDEAS REAL.</p>
+      </div>
+    </div>
+    <div class="arrival-bottom" aria-hidden="true">
+      <span class="arrival-bottom-note">WELCOME TO MY PORTFOLIO</span>
+      <div class="arrival-timer"><span id="intro-remaining">10s</span><span class="arrival-track"><span class="arrival-track-fill"></span></span></div>
     </div>
   </dialog>
   <div class="top-rule" aria-hidden="true"></div>
@@ -61,10 +89,6 @@
         <div class="hero-actions">
           <a class="button button-primary" href="#projects">View My Work <svg class="ui-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a>
           <a class="button button-outline" href="#contact">Let’s Connect <svg class="ui-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a>
-        </div>
-        <div class="hero-reel">
-          <button class="intro-replay" type="button" data-replay-intro hidden><span class="reel-play" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M3 1.5 10 6 3 10.5Z"/></svg></span>Watch the intro</button>
-          <span class="reel-duration">00:10 / A LITTLE ABOUT ME</span>
         </div>
         <div class="hero-note"><span class="status-dot"></span> Curious by nature. Building with purpose.</div>
       </div>
@@ -223,7 +247,6 @@
   <footer class="site-footer section-shell">
     <a class="brand footer-brand" href="#home"><span class="brand-orbit"></span><span>VINAY</span></a>
     <div class="footer-meta">
-      <button class="intro-replay" type="button" data-replay-intro hidden>Replay intro &rarr;</button>
       <span class="footer-time">LOCAL TIME <time id="current-time" aria-label="Local time"></time></span>
       <span>© <span id="current-year"></span> Vinay Pawar</span>
     </div>

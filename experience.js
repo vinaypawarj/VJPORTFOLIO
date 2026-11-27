@@ -1,81 +1,86 @@
 (() => {
   document.documentElement.classList.add("experience-ready");
   const intro = document.querySelector("#portfolio-intro");
-  const video = document.querySelector("#intro-video");
-  const skip = document.querySelector("#skip-intro");
-  const play = document.querySelector("#play-intro");
-  const progress = document.querySelector("#intro-progress");
-  const remaining = document.querySelector("#intro-remaining");
-  const replayButtons = document.querySelectorAll("[data-replay-intro]");
-  if (!intro || !video || typeof intro.showModal !== "function") return;
-  const sessionKey = "vinay-portfolio-intro-v1";
-  let previousFocus = null;
-  let watchdog = 0;
+  const remainingLabel = document.querySelector("#intro-remaining");
+  const DURATION = 10000;
 
-  function rememberIntro() {
-    try { sessionStorage.setItem(sessionKey, "seen"); } catch { /* Storage is optional. */ }
-  }
+  if (intro && remainingLabel && typeof intro.showModal === "function") {
+    let remaining = DURATION;
+    let startedAt = 0;
+    let endTimer = 0;
+    let countdownTimer = 0;
+    let previousFocus = null;
 
-  function finishIntro() {
-    window.clearTimeout(watchdog);
-    video.pause();
-    if (intro.open) intro.close();
-    document.body.classList.remove("intro-active");
-    rememberIntro();
-    if (previousFocus && document.contains(previousFocus)) previousFocus.focus({ preventScroll: true });
-  }
-
-  async function startIntro() {
-    if (intro.open) return;
-    previousFocus = document.activeElement;
-    play.hidden = true;
-    progress.value = 0;
-    remaining.textContent = "10s";
-    intro.showModal();
-    document.body.classList.add("intro-active");
-    video.muted = true;
-    if (!video.getAttribute("src")) video.src = video.dataset.src;
-    video.currentTime = 0;
-    watchdog = window.setTimeout(finishIntro, 18000);
-    try {
-      await video.play();
-    } catch {
-      if (intro.open) play.hidden = false;
+    function clearTimers() {
+      window.clearTimeout(endTimer);
+      window.clearInterval(countdownTimer);
+      endTimer = 0;
+      countdownTimer = 0;
     }
+
+    function finishIntro() {
+      clearTimers();
+      if (intro.open) intro.close();
+      intro.classList.remove("intro-running", "intro-paused");
+      document.body.classList.remove("intro-active");
+      if (previousFocus && document.contains(previousFocus)) previousFocus.focus({ preventScroll: true });
+    }
+
+    function resumeIntro() {
+      if (!intro.open || document.hidden || endTimer) return;
+      intro.classList.remove("intro-paused");
+      startedAt = performance.now();
+      endTimer = window.setTimeout(finishIntro, remaining);
+      countdownTimer = window.setInterval(() => {
+        const seconds = Math.max(0, Math.ceil((remaining - (performance.now() - startedAt)) / 1000));
+        remainingLabel.textContent = seconds + "s";
+      }, 100);
+    }
+
+    function pauseIntro() {
+      if (!intro.open) return;
+      if (endTimer) remaining = Math.max(0, remaining - (performance.now() - startedAt));
+      clearTimers();
+      intro.classList.add("intro-paused");
+    }
+
+    function startIntro() {
+      clearTimers();
+      previousFocus = document.activeElement === intro ? previousFocus : document.activeElement;
+      remaining = DURATION;
+      remainingLabel.textContent = "10s";
+      intro.style.setProperty("--intro-duration", DURATION + "ms");
+      intro.classList.remove("intro-running", "intro-paused");
+      if (!intro.open) intro.showModal();
+      document.body.classList.add("intro-active");
+      // Restart the animation when this page returns from the back/forward cache.
+      void intro.offsetWidth;
+      intro.classList.add("intro-running");
+      intro.focus({ preventScroll: true });
+      if (document.hidden) intro.classList.add("intro-paused");
+      else resumeIntro();
+    }
+
+    intro.addEventListener("cancel", event => { event.preventDefault(); finishIntro(); });
+    intro.addEventListener("close", () => {
+      if (intro.open) return;
+      clearTimers();
+      intro.classList.remove("intro-running", "intro-paused");
+      document.body.classList.remove("intro-active");
+    });
+    intro.querySelectorAll("img").forEach(img => {
+      img.addEventListener("error", () => { img.hidden = true; }, { once: true });
+    });
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) pauseIntro();
+      else resumeIntro();
+    });
+    window.addEventListener("pagehide", pauseIntro);
+    window.addEventListener("pageshow", event => { if (event.persisted) startIntro(); });
+
+    // Every page opening gets the introduction, including reloads and section links.
+    startIntro();
   }
-
-  replayButtons.forEach(button => {
-    button.hidden = false;
-    button.addEventListener("click", startIntro);
-  });
-  skip.addEventListener("click", finishIntro);
-  intro.addEventListener("cancel", event => { event.preventDefault(); finishIntro(); });
-  intro.addEventListener("close", () => {
-    video.pause();
-    window.clearTimeout(watchdog);
-    document.body.classList.remove("intro-active");
-  });
-  play.addEventListener("click", async () => {
-    try { await video.play(); play.hidden = true; } catch { finishIntro(); }
-  });
-  video.addEventListener("ended", finishIntro);
-  video.addEventListener("error", finishIntro);
-  video.addEventListener("timeupdate", () => {
-    const duration = Number.isFinite(video.duration) ? video.duration : 10;
-    progress.value = Math.min(10, video.currentTime * 10 / duration);
-    remaining.textContent = `${Math.ceil(Math.max(0, duration - video.currentTime))}s`;
-  });
-  video.addEventListener("playing", () => {
-    play.hidden = true;
-    window.clearTimeout(watchdog);
-    watchdog = window.setTimeout(finishIntro, 12000);
-  });
-
-  let seen = false;
-  try { seen = sessionStorage.getItem(sessionKey) === "seen"; } catch { /* Continue without storage. */ }
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const directSectionLink = location.hash && location.hash !== "#home";
-  if (!seen && !reduceMotion && !navigator.connection?.saveData && !directSectionLink) startIntro();
 
   const feedback = document.querySelector("#testimonials");
   const feedbackNames = [...document.querySelectorAll(".testimonial-item h3")];
