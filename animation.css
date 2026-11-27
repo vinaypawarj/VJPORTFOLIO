@@ -28,13 +28,18 @@
 .arrival-stage { position: relative; z-index: 2; width: min(100%, 1120px); height: 100%; min-height: 0; margin: auto; }
 .arrival-scene { position: absolute; inset: 0; display: grid; justify-items: center; align-content: center; gap: 24px; text-align: center; opacity: 0; pointer-events: none; }
 .arrival-eyebrow { margin: 0; color: #a29ba9; font-size: 10px; font-weight: 500; letter-spacing: .28em; }
-.arrival-emblem { position: relative; display: grid; place-items: center; width: clamp(180px, 24vw, 270px); aspect-ratio: 1; }
+.arrival-emblem { position: relative; isolation: isolate; display: grid; place-items: center; width: clamp(155px, 18vw, 210px); aspect-ratio: 1; }
+.arrival-emblem::before { content: ""; position: absolute; inset: -32px; z-index: -1; border-radius: 50%; background: conic-gradient(from 35deg, #80caff00, #80caff36, transparent 40%, #ffcf7033, transparent 80%); filter: blur(24px); }
+.arrival-emblem-photo { position: absolute; inset: 8px; width: calc(100% - 16px); height: calc(100% - 16px); object-fit: cover; object-position: center 24%; border-radius: 50%; border: 1px solid #ffffff24; box-shadow: -8px 0 32px #80caff17, 8px 0 30px #ffcf7012, 0 15px 45px #0008; }
+.arrival-emblem::after { content: ""; position: absolute; inset: 8px; border-radius: 50%; pointer-events: none; background: linear-gradient(115deg, #80caff13, transparent 35% 65%, #ffcf7010); }
+.arrival-emblem .arrival-orbit { z-index: 2; }
 .arrival-emblem strong { font-size: clamp(66px, 10vw, 110px); font-weight: 700; letter-spacing: -.1em; padding-right: .1em; }
 .arrival-orbit { position: absolute; inset: 0; border: 1px solid #ffffff12; border-radius: 50%; }
 .arrival-orbit::after { content: ""; position: absolute; inset: -2px; border-radius: 50%; background: conic-gradient(from -90deg, transparent 35%, #80caff, transparent 62%); mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px)); }
 .arrival-orbit--outer { inset: -17px; opacity: .7; transform: rotate(180deg); }
 .arrival-orbit--outer::after { background: conic-gradient(transparent 60%, #ffcf70, transparent 90%); }
-.arrival-intro-name { margin: 18px 0 0; color: #ddd8e0; font-size: 12px; letter-spacing: .38em; }
+.arrival-intro-name { margin: 12px 0 0; color: #f6f4ef; font-size: clamp(28px, 3.2vw, 41px); font-weight: 700; letter-spacing: .25em; padding-left: .25em; text-shadow: 0 0 25px #80caff16; }
+.arrival-intro-name span { display: block; margin-top: 13px; color: #a8bbd2; font-size: 9px; font-weight: 500; letter-spacing: .5em; padding-right: .25em; }
 .arrival-statement h2 { margin: 0; font-size: clamp(72px, 13vw, 164px); font-weight: 800; line-height: .85; letter-spacing: -.075em; }
 .arrival-statement h2 span { display: block; padding-block: .03em; }
 .arrival-statement h2 span:last-child { color: #ff365c; }
@@ -74,9 +79,9 @@
 .intro-running .arrival-chip:nth-child(3) { animation-delay: 2.8s; }
 .arrival.intro-paused, .intro-paused *, .intro-paused *::after { animation-play-state: paused !important; }
 @keyframes arrival-scene-one {
-  0% { opacity: 0; transform: scale(.88); filter: blur(10px); }
-  6%, 19% { opacity: 1; transform: scale(1); filter: blur(0); }
-  25%, 100% { opacity: 0; transform: scale(1.08); filter: blur(6px); }
+  0% { opacity: .3; transform: scale(.94); filter: none; }
+  5%, 19% { opacity: 1; transform: scale(1); filter: none; }
+  25%, 100% { opacity: 0; transform: scale(1.04); filter: none; }
 }
 @keyframes arrival-scene-two {
   0%, 22% { opacity: 0; transform: translateY(35px) scale(.96); }
@@ -103,9 +108,9 @@
   .arrival-brand { font-size: 9px; letter-spacing: .16em; }
   .arrival-stage { width: 100%; }
   .arrival-eyebrow { font-size: 8px; letter-spacing: .2em; }
-  .arrival-emblem { width: 180px; }
+  .arrival-emblem { width: 155px; }
   .arrival-emblem strong { font-size: 76px; }
-  .arrival-intro-name { font-size: 10px; letter-spacing: .27em; }
+  .arrival-intro-name { font-size: 28px; letter-spacing: .22em; }
   .arrival-statement h2 { font-size: clamp(68px, 20vw, 112px); }
   .arrival-chips { gap: 7px; }
   .arrival-chip { padding: 11px 10px; gap: 6px; font-size: 7px; letter-spacing: .06em; }
