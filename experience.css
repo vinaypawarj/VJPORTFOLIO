@@ -189,3 +189,26 @@ body::before { content: ""; position: absolute; top: 0; right: 0; width: min(90v
 }
 
 .brand:hover .brand-emblem { transform: translateY(-1px); }
+
+/* Three permanent colours, with one entrance when the motto first comes into view. */
+.focus-strip.motto-strip { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; padding-block: 32px; }
+.focus-strip.motto-strip > div { --motto-colour: #ffcf70; gap: 18px; }
+.focus-strip.motto-strip > div:nth-child(2) { --motto-colour: #80caff; }
+.focus-strip.motto-strip > div:nth-child(3) { --motto-colour: #cda7ff; }
+.focus-strip.motto-strip > div + div { padding-left: 32px; border-left: 1px solid #ffffff12; }
+.focus-strip.motto-strip > div > span { color: var(--motto-colour); opacity: .6; font-size: 12px; font-style: italic; }
+.motto-strip em { display: inline-block; color: var(--motto-colour); font: italic 500 clamp(29px, 4vw, 52px)/1.1 Georgia, "Times New Roman", serif; letter-spacing: .1em; text-shadow: 0 0 25px color-mix(in srgb, var(--motto-colour) 12%, transparent); }
+.motto-strip[data-motto-animation="pending"] em { opacity: 0; }
+.motto-strip[data-motto-animation="playing"] em { animation: motto-entrance 1s cubic-bezier(.2,.7,.2,1) both; }
+.motto-strip[data-motto-animation="playing"] > div:nth-child(2) em { animation-delay: .2s; }
+.motto-strip[data-motto-animation="playing"] > div:nth-child(3) em { animation-delay: .4s; }
+@keyframes motto-entrance { from { opacity: 0; transform: translateY(16px); filter: blur(5px); } to { opacity: 1; transform: none; filter: none; } }
+@media (max-width: 650px) {
+  .focus-strip.motto-strip { gap: 12px; padding-block: 25px; }
+  .focus-strip.motto-strip > div { flex-direction: column; justify-content: center; align-items: center; gap: 9px; }
+  .focus-strip.motto-strip > div + div { padding-left: 0; }
+  .motto-strip em { font-size: clamp(25px, 7vw, 42px); letter-spacing: .06em; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .motto-strip em { opacity: 1 !important; animation: none !important; transform: none !important; filter: none !important; }
+}

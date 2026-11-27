@@ -2,7 +2,7 @@
   document.documentElement.classList.add("experience-ready");
   const intro = document.querySelector("#portfolio-intro");
   const remainingLabel = document.querySelector("#intro-remaining");
-  const DURATION = 5000;
+  const DURATION = 10000;
 
   if (intro && remainingLabel && typeof intro.showModal === "function") {
     let remaining = DURATION;
@@ -10,6 +10,42 @@
     let endTimer = 0;
     let countdownTimer = 0;
     let previousFocus = null;
+    const soundtrack = document.querySelector("#intro-soundtrack");
+    const soundToggle = document.querySelector("#intro-sound-toggle");
+    let soundEnabled = true;
+    let soundAttempt = 0;
+
+    function showSoundState(state) {
+      intro.dataset.sound = state;
+      if (!soundToggle) return;
+      soundToggle.hidden = false;
+      const playing = state === "playing";
+      soundToggle.setAttribute("aria-pressed", String(playing));
+      soundToggle.setAttribute("aria-label", playing ? "Mute intro sound" : "Enable intro sound");
+      soundToggle.querySelector("span").textContent = playing ? "Sound on" : "Enable sound";
+    }
+
+    function stopSound(reset = false) {
+      soundAttempt += 1;
+      if (!soundtrack) return;
+      soundtrack.pause();
+      if (reset) { try { soundtrack.currentTime = 0; } catch { /* The clip may still be loading. */ } }
+    }
+
+    function playSound() {
+      if (!soundtrack || !soundEnabled || !intro.open || document.hidden) return;
+      const attempt = ++soundAttempt;
+      const elapsed = DURATION - remaining + (endTimer ? performance.now() - startedAt : 0);
+      try { soundtrack.currentTime = Math.max(0, Math.min(elapsed / 1000, 9.99)); } catch { /* Start when ready. */ }
+      soundtrack.volume = .5;
+      const playback = soundtrack.play();
+      if (playback?.then) playback.then(() => {
+        if (attempt !== soundAttempt || !intro.open || document.hidden || !soundEnabled) return;
+        showSoundState("playing");
+      }).catch(() => {
+        if (attempt === soundAttempt && intro.open) showSoundState("blocked");
+      });
+    }
 
     function clearTimers() {
       window.clearTimeout(endTimer);
@@ -20,6 +56,7 @@
 
     function finishIntro() {
       clearTimers();
+      stopSound(true);
       if (intro.open) intro.close();
       intro.classList.remove("intro-running", "intro-paused");
       document.body.classList.remove("intro-active");
@@ -35,12 +72,14 @@
         const seconds = Math.max(0, Math.ceil((remaining - (performance.now() - startedAt)) / 1000));
         remainingLabel.textContent = seconds + "s";
       }, 100);
+      playSound();
     }
 
     function pauseIntro() {
       if (!intro.open) return;
       if (endTimer) remaining = Math.max(0, remaining - (performance.now() - startedAt));
       clearTimers();
+      stopSound();
       intro.classList.add("intro-paused");
     }
 
@@ -48,12 +87,15 @@
       clearTimers();
       previousFocus = document.activeElement === intro ? previousFocus : document.activeElement;
       remaining = DURATION;
-      remainingLabel.textContent = "5s";
+      remainingLabel.textContent = "10s";
+      soundEnabled = true;
+      stopSound(true);
+      showSoundState("ready");
       intro.style.setProperty("--intro-duration", DURATION + "ms");
       intro.classList.remove("intro-running", "intro-paused");
       if (!intro.open) intro.showModal();
       document.body.classList.add("intro-active");
-      // Restart the animation when this page returns from the back/forward cache.
+      // One opening sequence per document; reloads create a new sequence.
       void intro.offsetWidth;
       intro.classList.add("intro-running");
       intro.focus({ preventScroll: true });
@@ -65,6 +107,7 @@
     intro.addEventListener("close", () => {
       if (intro.open) return;
       clearTimers();
+      stopSound(true);
       intro.classList.remove("intro-running", "intro-paused");
       document.body.classList.remove("intro-active");
     });
@@ -76,12 +119,52 @@
       else resumeIntro();
     });
     window.addEventListener("pagehide", pauseIntro);
-    window.addEventListener("pageshow", event => { if (event.persisted) startIntro(); });
+    window.addEventListener("pageshow", event => { if (event.persisted && intro.open) resumeIntro(); });
+    soundToggle?.addEventListener("click", () => {
+      if (soundtrack && !soundtrack.paused) {
+        soundEnabled = false;
+        stopSound();
+        showSoundState("muted");
+      } else {
+        soundEnabled = true;
+        playSound();
+      }
+    });
 
     // Every page opening gets the introduction, including reloads and section links.
     startIntro();
   }
 
+
+  // The three words animate on their first visible appearance, once per opening.
+  (() => {
+    const motto = document.querySelector("#portfolio-motto");
+    if (!motto || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    motto.dataset.mottoAnimation = "pending";
+    let played = false;
+    let visible = false;
+    let observer = null;
+    function revealMotto() {
+      if (played || document.hidden || intro?.open) return;
+      if (!observer) {
+        const rect = motto.getBoundingClientRect();
+        visible = rect.bottom > 0 && rect.top < window.innerHeight;
+      }
+      if (!visible) return;
+      played = true;
+      motto.dataset.mottoAnimation = "playing";
+      observer?.disconnect();
+      window.removeEventListener("scroll", revealMotto);
+      window.setTimeout(() => { motto.dataset.mottoAnimation = "complete"; }, 1600);
+    }
+    if ("IntersectionObserver" in window) {
+      observer = new IntersectionObserver(entries => { visible = entries.some(entry => entry.isIntersecting); revealMotto(); }, { threshold: .2 });
+      observer.observe(motto);
+    } else window.addEventListener("scroll", revealMotto, { passive: true });
+    intro?.addEventListener("close", revealMotto);
+    document.addEventListener("visibilitychange", revealMotto);
+    revealMotto();
+  })();
 
   // The main name writes only the first time it is actually viewed in this browser.
   (() => {

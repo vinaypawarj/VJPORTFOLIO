@@ -7,24 +7,64 @@
   <meta name="description" content="Vinay Pawar — UPSC aspirant and aspiring developer who enjoys problem-solving and building useful digital experiences.">
   <title>Vinay Pawar | Portfolio</title>
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="experience.css?v=main-type-five-2">
-  <link rel="stylesheet" href="animation.css?v=clean-intro-2">
-  <link rel="stylesheet" href="music.css?v=soundtrack-1">
+  <link rel="stylesheet" href="experience.css?v=veni-vidi-vici-1">
+  <link rel="stylesheet" href="animation.css?v=startup-growth-1">
   <link rel="stylesheet" href="chat.css?v=assistant-1">
   <script src="script.js?v=twenty-colours-1" defer></script>
-  <script src="experience.js?v=main-type-five-2" defer></script>
-  <script src="music.js?v=soundtrack-1" defer></script>
+  <script src="experience.js?v=startup-growth-1" defer></script>
   <script src="chat-config.js?v=assistant-1" defer></script>
   <script src="chat.js?v=assistant-1" defer></script>
 </head>
 <body>
   <a class="skip-content" href="#main-content">Skip to content</a>
-  <dialog class="slogan-intro" id="portfolio-intro" tabindex="-1" aria-label="5-second cartoon introduction" aria-describedby="slogan-description">
-    <p class="sr-only" id="slogan-description">Learning Today. Building Tomorrow. Shaping the Future. This cartoon introduction runs automatically for five seconds. Press Escape to enter the portfolio immediately.</p>
+  <dialog class="slogan-intro" id="portfolio-intro" tabindex="-1" aria-label="10-second startup growth introduction" aria-describedby="slogan-description">
+    <p class="sr-only" id="slogan-description">Learning Today. Building Tomorrow. Shaping the Future. A startup grows from an idea into a launch behind this ten-second introduction. It plays once on each opening or refresh. Press Escape to enter the portfolio immediately.</p>
+    <div class="startup-backdrop" aria-hidden="true">
+      <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" focusable="false">
+        <defs>
+          <linearGradient id="startup-growth-line" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#e9a85c"/><stop offset=".45" stop-color="#ffda8b"/><stop offset="1" stop-color="#8bd5ff"/></linearGradient>
+          <linearGradient id="startup-growth-fill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#77b2ef" stop-opacity=".14"/><stop offset="1" stop-color="#77b2ef" stop-opacity="0"/></linearGradient>
+          <linearGradient id="startup-tower-fill" x1="0" y1="1" x2="0" y2="0"><stop stop-color="#192335"/><stop offset="1" stop-color="#4a6488"/></linearGradient>
+          <radialGradient id="startup-halo-fill"><stop stop-color="#5e8ccd" stop-opacity=".32"/><stop offset="1" stop-color="#5e8ccd" stop-opacity="0"/></radialGradient>
+          <pattern id="startup-grid" width="90" height="90" patternUnits="userSpaceOnUse"><path d="M90 0H0V90" fill="none" stroke="#91b6eb" stroke-opacity=".07"/></pattern>
+        </defs>
+        <rect width="1440" height="900" fill="url(#startup-grid)"/>
+        <circle class="startup-halo" cx="1120" cy="310" r="410" fill="url(#startup-halo-fill)"/>
+        <g class="startup-city" fill="url(#startup-tower-fill)" stroke="#8badcf" stroke-opacity=".3">
+          <path class="startup-tower" style="--tower-delay:0s" d="M760 830V686h70v144Z"/>
+          <path class="startup-tower" style="--tower-delay:.4s" d="M851 830V601h77v229Z"/>
+          <path class="startup-tower" style="--tower-delay:.8s" d="M950 830V492h90v338Z"/>
+          <path class="startup-tower" style="--tower-delay:1.2s" d="M1062 830V367h97v463Z"/>
+          <path class="startup-tower" style="--tower-delay:1.6s" d="M1184 830V220h104v610Z"/>
+        </g>
+        <path class="startup-area" d="M60 800 260 752 455 662 660 596 853 451 1063 292 1270 112V900H60Z" fill="url(#startup-growth-fill)"/>
+        <path class="startup-chart" pathLength="1" d="M60 800C150 796 185 765 260 752S380 682 455 662 583 623 660 596 785 512 853 451 981 362 1063 292 1198 183 1270 112" fill="none" stroke="url(#startup-growth-line)" stroke-width="2.5" stroke-linecap="round"/>
+        <g class="startup-milestones" fill="#101927" stroke="#efd29e" stroke-width="2">
+          <circle class="startup-node" style="--node-delay:1s" cx="260" cy="752" r="8"/>
+          <circle class="startup-node" style="--node-delay:2.4s" cx="455" cy="662" r="8"/>
+          <circle class="startup-node" style="--node-delay:3.8s" cx="660" cy="596" r="8"/>
+          <circle class="startup-node" style="--node-delay:5.1s" cx="853" cy="451" r="8"/>
+          <circle class="startup-node" style="--node-delay:6.5s" cx="1063" cy="292" r="8"/>
+        </g>
+        <g class="startup-idea" transform="translate(212 645)" stroke="#efce8d" stroke-width="2" fill="none" stroke-linecap="round">
+          <path d="M29 64v-9C5 36 18 8 43 8s38 28 14 47v9Z"/><path d="M31 72h24M36 80h14M43 1v-8M8 20l-7-4M77 20l7-4M43 63V36m-8-7 8 7 8-7"/>
+        </g>
+        <g class="startup-launch" fill="none" stroke="#aedbff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path class="startup-trail" d="M1090 324q82-41 128-121" stroke="#f4c977" stroke-dasharray="4 11"/>
+          <g class="startup-rocket">
+            <path d="M1235 180q-2-43 44-71 13 50-22 76Z" fill="#b8d5ef" fill-opacity=".18"/>
+            <path d="m1234 156-22 5-5 26 29-8m28-25 6 29-23 16-1-15" fill="#668cc4" fill-opacity=".16"/>
+            <circle cx="1261" cy="142" r="8"/>
+            <path class="startup-flame" d="m1236 185-18 32 30-24" stroke="#f6d08c" stroke-width="4"/>
+          </g>
+        </g>
+        <g class="startup-sparks" fill="#b6d3fa"><circle cx="1290" cy="350" r="2"/><circle cx="950" cy="164" r="2"/><circle cx="132" cy="506" r="2"/><circle cx="590" cy="133" r="1.5"/><circle cx="1110" cy="65" r="1.5"/></g>
+      </svg>
+    </div>
     <div class="slogan-stage">
-      <h2 class="slogan-copy" aria-label="Learning Today. Building Tomorrow. Shaping the Future."><span class="slogan-line"><span class="slogan-written" aria-hidden="true"><span class="slogan-glyph" style="--ink-delay:0.120s">L</span><span class="slogan-glyph" style="--ink-delay:0.178s">e</span><span class="slogan-glyph" style="--ink-delay:0.236s">a</span><span class="slogan-glyph" style="--ink-delay:0.294s">r</span><span class="slogan-glyph" style="--ink-delay:0.352s">n</span><span class="slogan-glyph" style="--ink-delay:0.410s">i</span><span class="slogan-glyph" style="--ink-delay:0.468s">n</span><span class="slogan-glyph" style="--ink-delay:0.526s">g</span><span class="slogan-glyph" style="--ink-delay:0.584s"> </span><span class="slogan-glyph" style="--ink-delay:0.642s">T</span><span class="slogan-glyph" style="--ink-delay:0.700s">o</span><span class="slogan-glyph" style="--ink-delay:0.758s">d</span><span class="slogan-glyph" style="--ink-delay:0.816s">a</span><span class="slogan-glyph" style="--ink-delay:0.874s">y</span><span class="slogan-glyph" style="--ink-delay:0.932s">.</span><i class="slogan-pen" aria-hidden="true"></i></span></span>
-        <span class="slogan-line"><span class="slogan-written" aria-hidden="true"><span class="slogan-glyph" style="--ink-delay:1.240s">B</span><span class="slogan-glyph" style="--ink-delay:1.298s">u</span><span class="slogan-glyph" style="--ink-delay:1.356s">i</span><span class="slogan-glyph" style="--ink-delay:1.414s">l</span><span class="slogan-glyph" style="--ink-delay:1.472s">d</span><span class="slogan-glyph" style="--ink-delay:1.530s">i</span><span class="slogan-glyph" style="--ink-delay:1.588s">n</span><span class="slogan-glyph" style="--ink-delay:1.646s">g</span><span class="slogan-glyph" style="--ink-delay:1.704s"> </span><span class="slogan-glyph" style="--ink-delay:1.762s">T</span><span class="slogan-glyph" style="--ink-delay:1.820s">o</span><span class="slogan-glyph" style="--ink-delay:1.878s">m</span><span class="slogan-glyph" style="--ink-delay:1.936s">o</span><span class="slogan-glyph" style="--ink-delay:1.994s">r</span><span class="slogan-glyph" style="--ink-delay:2.052s">r</span><span class="slogan-glyph" style="--ink-delay:2.110s">o</span><span class="slogan-glyph" style="--ink-delay:2.168s">w</span><span class="slogan-glyph" style="--ink-delay:2.226s">.</span><i class="slogan-pen" aria-hidden="true"></i></span></span>
-        <span class="slogan-line"><span class="slogan-written" aria-hidden="true"><span class="slogan-glyph" style="--ink-delay:2.460s">S</span><span class="slogan-glyph" style="--ink-delay:2.518s">h</span><span class="slogan-glyph" style="--ink-delay:2.576s">a</span><span class="slogan-glyph" style="--ink-delay:2.634s">p</span><span class="slogan-glyph" style="--ink-delay:2.692s">i</span><span class="slogan-glyph" style="--ink-delay:2.750s">n</span><span class="slogan-glyph" style="--ink-delay:2.808s">g</span><span class="slogan-glyph" style="--ink-delay:2.866s"> </span><span class="slogan-glyph" style="--ink-delay:2.924s">t</span><span class="slogan-glyph" style="--ink-delay:2.982s">h</span><span class="slogan-glyph" style="--ink-delay:3.040s">e</span><span class="slogan-glyph" style="--ink-delay:3.098s"> </span><span class="slogan-glyph" style="--ink-delay:3.156s">F</span><span class="slogan-glyph" style="--ink-delay:3.214s">u</span><span class="slogan-glyph" style="--ink-delay:3.272s">t</span><span class="slogan-glyph" style="--ink-delay:3.330s">u</span><span class="slogan-glyph" style="--ink-delay:3.388s">r</span><span class="slogan-glyph" style="--ink-delay:3.446s">e</span><span class="slogan-glyph" style="--ink-delay:3.504s">.</span><i class="slogan-pen" aria-hidden="true"></i></span></span></h2>
+      <h2 class="slogan-copy" aria-label="Learning Today. Building Tomorrow. Shaping the Future."><span class="slogan-line"><span class="slogan-written" aria-hidden="true"><span class="slogan-glyph" style="--ink-delay:0.240s">L</span><span class="slogan-glyph" style="--ink-delay:0.356s">e</span><span class="slogan-glyph" style="--ink-delay:0.472s">a</span><span class="slogan-glyph" style="--ink-delay:0.588s">r</span><span class="slogan-glyph" style="--ink-delay:0.704s">n</span><span class="slogan-glyph" style="--ink-delay:0.820s">i</span><span class="slogan-glyph" style="--ink-delay:0.936s">n</span><span class="slogan-glyph" style="--ink-delay:1.052s">g</span><span class="slogan-glyph" style="--ink-delay:1.168s"> </span><span class="slogan-glyph" style="--ink-delay:1.284s">T</span><span class="slogan-glyph" style="--ink-delay:1.400s">o</span><span class="slogan-glyph" style="--ink-delay:1.516s">d</span><span class="slogan-glyph" style="--ink-delay:1.632s">a</span><span class="slogan-glyph" style="--ink-delay:1.748s">y</span><span class="slogan-glyph" style="--ink-delay:1.864s">.</span><i class="slogan-pen" aria-hidden="true"></i></span></span>
+        <span class="slogan-line"><span class="slogan-written" aria-hidden="true"><span class="slogan-glyph" style="--ink-delay:2.480s">B</span><span class="slogan-glyph" style="--ink-delay:2.596s">u</span><span class="slogan-glyph" style="--ink-delay:2.712s">i</span><span class="slogan-glyph" style="--ink-delay:2.828s">l</span><span class="slogan-glyph" style="--ink-delay:2.944s">d</span><span class="slogan-glyph" style="--ink-delay:3.060s">i</span><span class="slogan-glyph" style="--ink-delay:3.176s">n</span><span class="slogan-glyph" style="--ink-delay:3.292s">g</span><span class="slogan-glyph" style="--ink-delay:3.408s"> </span><span class="slogan-glyph" style="--ink-delay:3.524s">T</span><span class="slogan-glyph" style="--ink-delay:3.640s">o</span><span class="slogan-glyph" style="--ink-delay:3.756s">m</span><span class="slogan-glyph" style="--ink-delay:3.872s">o</span><span class="slogan-glyph" style="--ink-delay:3.988s">r</span><span class="slogan-glyph" style="--ink-delay:4.104s">r</span><span class="slogan-glyph" style="--ink-delay:4.220s">o</span><span class="slogan-glyph" style="--ink-delay:4.336s">w</span><span class="slogan-glyph" style="--ink-delay:4.452s">.</span><i class="slogan-pen" aria-hidden="true"></i></span></span>
+        <span class="slogan-line"><span class="slogan-written" aria-hidden="true"><span class="slogan-glyph" style="--ink-delay:4.920s">S</span><span class="slogan-glyph" style="--ink-delay:5.036s">h</span><span class="slogan-glyph" style="--ink-delay:5.152s">a</span><span class="slogan-glyph" style="--ink-delay:5.268s">p</span><span class="slogan-glyph" style="--ink-delay:5.384s">i</span><span class="slogan-glyph" style="--ink-delay:5.500s">n</span><span class="slogan-glyph" style="--ink-delay:5.616s">g</span><span class="slogan-glyph" style="--ink-delay:5.732s"> </span><span class="slogan-glyph" style="--ink-delay:5.848s">t</span><span class="slogan-glyph" style="--ink-delay:5.964s">h</span><span class="slogan-glyph" style="--ink-delay:6.080s">e</span><span class="slogan-glyph" style="--ink-delay:6.196s"> </span><span class="slogan-glyph" style="--ink-delay:6.312s">F</span><span class="slogan-glyph" style="--ink-delay:6.428s">u</span><span class="slogan-glyph" style="--ink-delay:6.544s">t</span><span class="slogan-glyph" style="--ink-delay:6.660s">u</span><span class="slogan-glyph" style="--ink-delay:6.776s">r</span><span class="slogan-glyph" style="--ink-delay:6.892s">e</span><span class="slogan-glyph" style="--ink-delay:7.008s">.</span><i class="slogan-pen" aria-hidden="true"></i></span></span></h2>
       <div class="slogan-art" aria-hidden="true"><svg viewBox="0 0 700 420" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" stroke-linecap="round" stroke-linejoin="round">
   <defs>
     <linearGradient id="toon-screen" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#bceaff"/><stop offset="1" stop-color="#97bdf4"/></linearGradient>
@@ -103,7 +143,9 @@
   </g>
 </svg></div>
     </div>
-    <span class="sr-only" id="intro-remaining" aria-hidden="true">5s</span>
+    <audio id="intro-soundtrack" src="assets/intro-soundtrack.mp3" preload="auto" aria-hidden="true"></audio>
+    <button class="intro-sound-toggle" id="intro-sound-toggle" type="button" aria-label="Enable intro sound" aria-pressed="false" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m11 5-6 4H2v6h3l6 4ZM15 8q5 4 0 8m3-11q8 7 0 14"/></svg><span>Enable sound</span></button>
+    <span class="sr-only" id="intro-remaining" aria-hidden="true">10s</span>
   </dialog>
   <div class="top-rule" aria-hidden="true"></div>
   <header class="site-header">
@@ -160,10 +202,10 @@
       <a class="scroll-cue" href="#about"><span></span> SCROLL TO EXPLORE</a>
     </section>
 
-    <div class="focus-strip section-shell" aria-label="My approach">
-      <div><span>01</span> LEARN DEEPLY.</div>
-      <div><span>02</span> BUILD THOUGHTFULLY.</div>
-      <div><span>03</span> KEEP MOVING FORWARD.</div>
+    <div class="focus-strip motto-strip section-shell" id="portfolio-motto" aria-label="Veni. Vidi. Vici.">
+      <div><span>1</span><em>VENI</em></div>
+      <div><span>2</span><em>VIDI</em></div>
+      <div><span>3</span><em>VICI</em></div>
     </div>
 
     <section class="content-section section-shell about-section" id="about">
@@ -302,22 +344,6 @@
       <span>© <span id="current-year"></span> Vinay Pawar</span>
     </div>
   </footer>
-  <details class="portfolio-music" id="portfolio-music" data-video-id="yNUidYJ6EtA">
-    <summary class="music-toggle" aria-controls="music-panel">
-      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 18V5l11-2v13M9 9l11-2"/><ellipse cx="6" cy="18" rx="3" ry="2.5"/><ellipse cx="17" cy="16" rx="3" ry="2.5"/></svg>
-      <span>Music</span>
-      <span class="music-chevron" aria-hidden="true">⌃</span>
-    </summary>
-    <section class="music-panel" id="music-panel" aria-labelledby="music-heading">
-      <div class="music-panel-header">
-        <div><span class="music-kicker">THE PORTFOLIO SOUNDTRACK</span><h2 id="music-heading">A little inspiration.</h2></div>
-        <button class="music-close" id="music-close" type="button" aria-label="Stop and close music"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button>
-      </div>
-      <div class="music-frame" id="music-frame"></div>
-      <div class="music-credit"><span>NETUNO MUSIC · YouTube</span><a href="https://www.youtube.com/shorts/yNUidYJ6EtA" target="_blank" rel="noopener noreferrer">Open on YouTube ↗</a></div>
-      <noscript><p><a href="https://www.youtube.com/shorts/yNUidYJ6EtA" target="_blank" rel="noopener noreferrer">Listen to the soundtrack on YouTube ↗</a></p></noscript>
-    </section>
-  </details>
   <div class="portfolio-chat" id="portfolio-chat">
     <button class="chat-launcher" id="chat-launcher" type="button" aria-expanded="false" aria-controls="chat-panel" hidden>
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-8 8H5l-4 3 1.5-6A8 8 0 1 1 20 11.5Z"/><path d="M7 10h8M7 14h5"/></svg>

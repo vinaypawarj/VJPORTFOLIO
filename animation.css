@@ -1,5 +1,5 @@
-/* Cartoon opening: the slogan is the only visible intro text. */
-.slogan-intro { --intro-duration: 5000ms; position: fixed; inset: 0; width: 100%; height: 100svh; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: clamp(24px, 4vw, 60px); border: 0; overflow: hidden; color: #f6f4ef; background: #090b12; }
+/* Cartoon opening with a growing startup scene and a ten-second soundtrack. */
+.slogan-intro { --intro-duration: 10000ms; position: fixed; inset: 0; width: 100%; height: 100svh; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: clamp(24px, 4vw, 60px); border: 0; overflow: hidden; color: #f6f4ef; background: #090b12; }
 .slogan-intro[open] { display: grid; place-items: center; }
 .slogan-intro::backdrop { background: transparent; }
 .slogan-intro::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 77% 48%, #22385e3d, transparent 47%), radial-gradient(ellipse at 20% 68%, #3d1e3b33, transparent 52%); }
@@ -91,4 +91,43 @@
 @media (prefers-reduced-motion: reduce) {
   .slogan-glyph { opacity: 1 !important; transform: none !important; filter: none !important; }
   .slogan-pen { display: none !important; }
+}
+
+/* A growing skyline, milestones, and a launch sit behind the opening slogan. */
+.startup-backdrop { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; opacity: .62; }
+.startup-backdrop > svg { display: block; width: 100%; height: 100%; }
+.slogan-intro::before { z-index: 1; background: linear-gradient(90deg, #090b1280, #090b1220 60%, #090b1200), radial-gradient(ellipse at 77% 48%, #22385e30, transparent 47%); }
+.slogan-stage { z-index: 2; }
+.slogan-copy { text-shadow: 0 4px 30px #090b12; }
+.startup-chart { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.startup-area, .startup-node, .startup-idea, .startup-launch { opacity: 0; }
+.startup-tower { transform-box: fill-box; transform-origin: center bottom; opacity: 0; }
+.startup-halo { transform-box: fill-box; transform-origin: center; }
+.intro-running .startup-chart { animation: startup-chart-draw var(--intro-duration) linear both; }
+.intro-running .startup-area { animation: startup-area-rise var(--intro-duration) ease both; }
+.intro-running .startup-tower { animation: startup-tower-rise 6.8s cubic-bezier(.2,.65,.25,1) both; animation-delay: calc(1s + var(--tower-delay)); }
+.intro-running .startup-node { animation: startup-node-light .8s ease-out both; animation-delay: var(--node-delay); }
+.intro-running .startup-idea { animation: startup-idea-glow var(--intro-duration) ease both; }
+.intro-running .startup-launch { animation: startup-launch-rise var(--intro-duration) ease both; }
+.intro-running .startup-halo { animation: startup-halo-grow var(--intro-duration) ease both; }
+.intro-running .startup-sparks { animation: startup-sparks-rise var(--intro-duration) linear both; }
+.intro-sound-toggle { position: absolute; top: max(22px, env(safe-area-inset-top)); right: max(24px, env(safe-area-inset-right)); z-index: 3; display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 44px; padding: 0 15px; border: 1px solid #8e9baa66; border-radius: 25px; background: #131c2aee; color: #d3ddec; font: 500 12px var(--body); cursor: pointer; }
+.intro-sound-toggle svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.intro-sound-toggle:hover, .intro-sound-toggle[aria-pressed="true"] { color: #ffdc99; border-color: #d7bd8d88; }
+@keyframes startup-chart-draw { 0%, 3% { stroke-dashoffset: 1; } 88%, 100% { stroke-dashoffset: 0; } }
+@keyframes startup-area-rise { 0%, 12% { opacity: 0; } 90%, 100% { opacity: 1; } }
+@keyframes startup-tower-rise { 0%, 5% { opacity: 0; transform: scaleY(.03); } 25% { opacity: .35; } 100% { opacity: .75; transform: scaleY(1); } }
+@keyframes startup-node-light { from { opacity: 0; stroke-width: 8; } to { opacity: 1; stroke-width: 2; } }
+@keyframes startup-idea-glow { 0% { opacity: 0; } 12%, 42% { opacity: .8; } 65%, 100% { opacity: 0; } }
+@keyframes startup-launch-rise { 0%, 61% { opacity: 0; transform: translate(-95px, 110px); } 70% { opacity: 1; } 94% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translate(35px, -40px); } }
+@keyframes startup-halo-grow { from { opacity: .3; transform: scale(.6); } to { opacity: 1; transform: scale(1.1); } }
+@keyframes startup-sparks-rise { from { opacity: 0; transform: translateY(30px); } 20%, 85% { opacity: .6; } to { opacity: 0; transform: translateY(-35px); } }
+@media (max-width: 650px) {
+  .startup-backdrop { width: 150%; left: -30%; opacity: .48; }
+  .intro-sound-toggle { top: max(14px, env(safe-area-inset-top)); right: 16px; min-height: 40px; padding-inline: 12px; font-size: 11px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .startup-chart { stroke-dashoffset: 0; }
+  .startup-area, .startup-node, .startup-tower { opacity: .6; transform: none; }
+  .startup-idea, .startup-launch { opacity: .7; transform: none; }
 }

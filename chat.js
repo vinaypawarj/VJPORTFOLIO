@@ -76,8 +76,6 @@
     panel.hidden = !open;
     launcher.setAttribute("aria-expanded", String(open));
     if (open) {
-      const music = document.querySelector("#portfolio-music");
-      if (music?.open) music.open = false;
       input.focus({ preventScroll: true }); scrollMessages();
     } else launcher.focus({ preventScroll: true });
   }
@@ -149,9 +147,6 @@
   root.querySelector("#chat-close").addEventListener("click", () => setOpen(false));
   root.querySelector("#chat-reset").addEventListener("click", () => { resetChat(); input.focus(); });
   root.addEventListener("keydown", event => { if (event.key === "Escape" && !panel.hidden) setOpen(false); });
-  document.querySelector("#portfolio-music")?.addEventListener("toggle", event => {
-    if (event.target.open && !panel.hidden) { panel.hidden = true; launcher.setAttribute("aria-expanded", "false"); }
-  });
   form.addEventListener("submit", event => {
     event.preventDefault();
     if (pending) { pending.abort(); return; }
