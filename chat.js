@@ -15,6 +15,34 @@
   } catch { /* The portfolio guide remains available before AI is configured. */ }
   let history = [];
   let pending = null;
+  let openedOnce = false;
+  const welcomes = [
+    "Hey there! 👋 Welcome to Vinay’s portfolio.",
+    "Hello, explorer! 🧭 Glad you stopped by.",
+    "A warm welcome! ☀️ Let’s explore Vinay’s journey.",
+    "Welcome aboard! 🚀 Discover what Vinay is learning and building.",
+    "Hi and welcome! 🌟 A curious mind starts with a question.",
+    "Good to see you! 😊 What would you like to discover today?",
+    "Hello, curious mind! 💡 Let’s find what you’re looking for.",
+    "Thanks for stopping by! 🙌 Take a look around.",
+    "Welcome to Vinay’s corner of the web! 🌐 Let’s get started.",
+    "Hey, welcome in! ✨ Ready to explore something new?"
+  ];
+  const welcomeKey = "vinay-chat-welcome-v1";
+  let welcomeIndex = -1;
+  try {
+    const saved = parseInt(localStorage.getItem(welcomeKey), 10);
+    if (Number.isInteger(saved) && saved >= 0 && saved < welcomes.length) welcomeIndex = saved;
+  } catch { /* Greetings still rotate when storage is unavailable. */ }
+
+  function welcomeMessage() {
+    welcomeIndex = (welcomeIndex + 1) % welcomes.length;
+    try { localStorage.setItem(welcomeKey, String(welcomeIndex)); } catch { /* Storage is optional. */ }
+    const help = endpoint
+      ? "I’m Vinay’s AI assistant. Ask about his portfolio, coding or study topics. How can I help?"
+      : "I’m Vinay’s portfolio guide. I can help with his profile, skills, work and contact options. What would you like to explore?";
+    return welcomes[welcomeIndex] + "\n\n" + help;
+  }
 
   function scrollMessages() { messages.scrollTop = messages.scrollHeight; }
 
@@ -78,6 +106,9 @@
     document.body.classList.toggle("chat-open", open);
     launcher.setAttribute("aria-expanded", String(open));
     if (open) {
+      // Refresh only the welcome; reopening an active conversation keeps it intact.
+      if (openedOnce && !messages.querySelector('[data-role="user"]')) resetChat();
+      openedOnce = true;
       input.focus({ preventScroll: true }); scrollMessages();
     } else launcher.focus({ preventScroll: true });
   }
@@ -86,9 +117,7 @@
     pending?.abort(); pending = null; history = [];
     messages.replaceChildren(); suggestions.hidden = false;
     input.value = ""; input.style.height = ""; setBusy(false);
-    addMessage("assistant", endpoint
-      ? "Hi! I’m Vinay’s AI assistant. Ask me about his portfolio, coding, study topics, or anything you would like to understand."
-      : "Hi! I’m Vinay’s portfolio guide. I can help you explore his profile, skills, work, and contact details. General AI replies are not connected yet.");
+    addMessage("assistant", welcomeMessage());
   }
 
   function setBusy(busy) {
