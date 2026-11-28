@@ -74,6 +74,8 @@
 
   function setOpen(open) {
     panel.hidden = !open;
+    root.dataset.open = String(open);
+    document.body.classList.toggle("chat-open", open);
     launcher.setAttribute("aria-expanded", String(open));
     if (open) {
       input.focus({ preventScroll: true }); scrollMessages();
