@@ -10,7 +10,7 @@ body { overflow-x: clip; }
 .hero-copy, .hero-visual, .about-copy, .project-card, .contact-bottom > * { min-width: 0; }
 .hero h1 { font-size: clamp(68px, 8.2vw, 116px); }
 .hero-intro { font-size: 16px; line-height: 1.75; }
-.hero-visual { width: 100%; height: clamp(360px, 38vw, 520px); }
+.hero-visual { width: 100%; height: clamp(360px, 38vw, 520px); overflow: clip; }
 .hero-note { font-size: 12px; line-height: 1.65; }
 .hero .eyebrow, .section-kicker { font-size: 11px; line-height: 1.6; }
 .button { min-height: 48px; font-size: 14px; padding: 12px 19px; text-align: center; }
