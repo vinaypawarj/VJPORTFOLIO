@@ -1,0 +1,22 @@
+/* The name keeps its space while ten typefaces and colours rotate. */
+.hero h1.name-cycle-ready {
+  height: calc(var(--name-base-size) * 2.5);
+  min-height: 0;
+  max-width: 100%;
+  padding-block: .04em;
+  font-family: var(--name-font, var(--display));
+  font-size: calc(var(--name-base-size) * var(--name-scale, 1));
+  font-weight: var(--name-weight, 700);
+  font-style: var(--name-font-style, normal);
+  letter-spacing: var(--name-tracking, -.055em);
+  line-height: 1.12;
+  opacity: 1;
+  transition: opacity .18s ease;
+}
+.hero h1.name-cycle-ready .name-word { width: fit-content; padding-block: .03em; white-space: nowrap; }
+.hero h1.name-cycle-ready .name-first { color: var(--name-first-colour, #f6f4ef); }
+.hero h1.name-cycle-ready .name-second { color: var(--name-second-colour, #ff6485); }
+.hero h1.name-cycle-ready.is-font-changing { opacity: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .hero h1.name-cycle-ready { transition: none; opacity: 1 !important; }
+}
